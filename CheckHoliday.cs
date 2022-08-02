@@ -11,7 +11,7 @@
 
         internal void CheckIsHoliday()
         {
-            double year = Convert.ToDouble(date.Year);
+            int year = Convert.ToInt32(date.Year);
 
             Console.WriteLine("\nChecking Now...");
 
@@ -63,27 +63,23 @@
             }
         }
 
-        private static DateTime PickingEaster(double year)
+        private static DateTime PickingEaster(int easterYear)
         {
-            double A = (int)(year % 19);
-            double B = (int)Math.Floor(year / 100);
-            double C = (int)(year % 100);
-            double D = (int)(B / 4);
-            double E = (int)(B % 4);
-            double F = (int)Math.Floor(B + 8) / 25;
-            double G = (int)Math.Floor(1 + B - F) / 3;
-            double H = (int)((19 * A) + B + 15 - (D + G)) % 30;
-            double I = (int)Math.Floor(C / 4);
-            double K = (int)(C % 4);
-            double L = (int)(32 + (2 * E) + (2 * I) - (H + K)) % 7;
-            double M = (int)Math.Floor(((A + (11 * H) + (22 * L)) / 451));
+            int lunarCyclePosition = easterYear % 19;
+            int century = easterYear / 100;
+            int daysBetweenEquinoxAndFullmoon = (century - (int)(century / 4) - (int)((8 * century + 13) / 25) + 19 * lunarCyclePosition + 15) % 30;
+            int daysBetweenFullmoonAndFirstSunday = daysBetweenEquinoxAndFullmoon - (int)(daysBetweenEquinoxAndFullmoon / 28) * (1 - (int)(daysBetweenEquinoxAndFullmoon / 28) * (int)(29 / (daysBetweenEquinoxAndFullmoon + 1)) * (int)((21 - lunarCyclePosition) / 11));
 
-            int easterMonth = (int)Math.Floor(((H + L + 114 - (7 * M)) / 31));
-            int easterDay = (int)((H + L + 114 - (7 * M)) % 31) + 1;
-            int easterYear = Convert.ToInt32(year);
+            int easterDay = daysBetweenFullmoonAndFirstSunday - ((easterYear + (int)(easterYear / 4) + daysBetweenFullmoonAndFirstSunday + 2 - century + (int)(century / 4)) % 7) + 28;
+            int easterMonth = 3;
+
+            if (easterDay > 31)
+            {
+                easterMonth++;
+                easterDay -= 31;
+            }
 
             DateTime easter = new DateTime(easterYear,easterMonth,easterDay);
-
             return easter;
         }
 

@@ -38,12 +38,3 @@ namespace CheckIsHoliday
         }
     }
 }
-
-//Dois pontos depois da classe é vai receber herança de outra classe
-//Classe abstrata só serve para ser herdada por outra classe, metodos abstratos devem ser sebrescrevidos
-//Polimorfismo
-
-//Interface - faz a comunicação entre o usuario e o sistema
-//Qualquer coisa que sirva de comunicação entre duas coisas é uma interace
-//Quando definido um comportamento no Interface, é obrigatorio o uso do método
-//Interace também é chamado de contrato 
