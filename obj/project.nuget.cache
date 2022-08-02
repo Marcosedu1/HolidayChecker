@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ejef59kWh62kJ0zkHK6ZPbpbnIQmQ1uh0xZFIA6hgc88VHLrsQui/zPmeSU0aWqhQU18EdbkAl9kDcnxnp0DEg==",
+  "dgSpecHash": "yjtNSDomWCxxCgIx0F9KLClCxJl3r7psyVZyvOHkOJZkTQy3nIpx7zz1xzS0f9341kpCO0DpPTZZoDLOSqf/mg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Marcos Eduardo\\Documents\\Projects\\CheckIsHoliday\\CheckIsHoliday.csproj",
+  "projectFilePath": "C:\\Users\\Marcos Eduardo\\Documents\\Projects\\HolidayChecker\\CheckIsHoliday.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

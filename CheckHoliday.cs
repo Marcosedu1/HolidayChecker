@@ -18,7 +18,23 @@
             DateTime easter = PickingEaster(year);
             bool leapYear = isLeapYear(year);
 
-            IsHoliday(date, year, leapYear, easter);
+            DateTime carnival = !leapYear? easter.AddDays(-47) : easter.AddDays(-48);
+
+            List<Holiday> holidays = new List<Holiday>
+            {
+                new Holiday(easter.Day,easter.Month,"Easter"),
+                new Holiday(carnival.Day,carnival.Month, "Carnival"),
+                new Holiday(easter.AddDays(-2).Day,easter.AddDays(-2).Month,"Good Friday"),
+                new Holiday(easter.AddDays(60).Day,easter.AddDays(60).Month,"Corpus Christi"),
+                new Holiday(21,4,"Tiradentes Holiday"),
+                new Holiday(7,9, "Independence of Brazil"),
+                new Holiday(12,10,"Day of Our Lady"),
+                new Holiday(2,11, "All Souls' Day"),
+                new Holiday(15,11, "Proclamation of the Republic"),
+                new Holiday(25,12, "Chrismas"),
+            };
+
+            IsHoliday(date, holidays);
         }
 
         private bool isLeapYear(double year)
@@ -71,88 +87,44 @@
             return easter;
         }
 
-        internal void IsHoliday(DateTime date, double year, bool leapYear, DateTime easter)
+        internal void IsHoliday(DateTime date, List<Holiday> holidays)
         {
-            string holiday = "";
+            string holidayName = "";
             bool isHoliday = false;
 
-            if(date == easter)
+            foreach (var holiday in holidays)
             {
-                isHoliday = true;
-                holiday = "Easter";
-            }else
-            {
-                DateTime carnival;
-                if (!leapYear)
-                {
-                    carnival = easter.AddDays(-47);
-                }
-                else
-                {
-                    carnival = easter.AddDays(-48);
-                }
-
-                if(date == carnival)
+                if (date.Day == holiday.Day && date.Month == holiday.Month)
                 {
                     isHoliday = true;
-                    holiday = "Carnival";
+                    holidayName = holiday.HolidayName;
+                    break;
                 }
-            }
-            if(date == easter.AddDays(-2))
-            {
-                isHoliday = true;
-                holiday = "Good Friday";
-
-            }else if(date == easter.AddDays(60))
-            {
-                isHoliday = true;
-                holiday = "Corpus Christi";
-
-            }else if(date.Day == 21 && date.Month == 4)
-            {
-                isHoliday = true;
-                holiday = "Tiradentes Holiday";
-
-            }else if(date.Day == 1 && date.Month == 5)
-            {
-                isHoliday = true;
-                holiday = "Worker's Day";
-
-            }else if(date.Day == 7 && date.Month == 9)
-            {
-                isHoliday = true;
-                holiday = "Independence of Brazil";
-
-            }else if(date.Day == 12 && date.Month == 10)
-            {
-                isHoliday = true;
-                holiday = "Day of Our Lady";
-
-            }else if(date.Day == 2 && date.Month == 11)
-            {
-                isHoliday = true;
-                holiday = "All Souls' Day";
-
-            }else if(date.Day == 15 && date.Month == 11)
-            {
-                isHoliday = true;
-                holiday = "Proclamation of the Republic";
-
-            }else if(date.Day == 25 && date.Month == 12)
-            {
-                isHoliday = true;
-                holiday = "Chrismas";
-
             }
 
             if (isHoliday)
             {
-                Console.WriteLine($"The day {date.Day}/{date.Month}/{date.Year} is a Holiday: {holiday}");
+                Console.WriteLine($"The day {date.Day}/{date.Month}/{date.Year} is a Holiday: {holidayName}");
             }
             else
             {
                 Console.WriteLine($"The day {date.Day}/{date.Month}/{date.Year} isn't a Holiday");
             }
         }
+    }
+
+    class Holiday
+    {
+        public Holiday(int day, int month, string holiday)
+        {
+            Day = day;
+            Month = month;
+            HolidayName = holiday;
+        }
+
+        public int Day { get; private set; }
+        public int Month { get; private set; }
+        public string HolidayName { get; private set; }
+
     }
 }
