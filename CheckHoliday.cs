@@ -27,6 +27,7 @@
                 new Holiday(easter.AddDays(-2).Day,easter.AddDays(-2).Month,"Good Friday"),
                 new Holiday(easter.AddDays(60).Day,easter.AddDays(60).Month,"Corpus Christi"),
                 new Holiday(21,4,"Tiradentes Holiday"),
+                new Holiday(1,1,"New Year's Day"),
                 new Holiday(7,9, "Independence of Brazil"),
                 new Holiday(12,10,"Day of Our Lady"),
                 new Holiday(2,11, "All Souls' Day"),
